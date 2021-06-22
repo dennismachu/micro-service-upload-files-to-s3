@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+    s3-upload-service:
+        container_name: s3-upload-service
+        build:
+            context: ./
+        ports:
+            - "8081:8080"
+        volumes:
+            - ./s3-upload-service:/usr/src/app
+        environment:
+            - AWS_ACCESS_KEY_ID= "${AWS_ACCESS_KEY_ID}"
+            - AWS_SECRET_ACCESS_KEY= "${AWS_SECRET_ACCESS_KEY}"
+            - AWS_REGION= "${AWS_REGION}"
+            - AWS_S3_BUCKET_NAME= "${AWS_S3_BUCKET_NAME}"
+            - AWS_SDK_LOAD_CONFIG= true
+            # - PORT= "${PORT}"
+            - MULTIPLE_FILE_UPLOAD_LIMIT= "${MULTIPLE_FILE_UPLOAD_LIMIT}"
